@@ -1,0 +1,195 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(139, 94, 60, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(244, 167, 185, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, rgba(137, 196, 225, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at center, #2d1f18 0%, #1a0f0a 100%);
+}
+
+/* ─── Balloons ─────────────────────────────────────────── */
+.balloonsContainer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.balloon {
+  position: absolute;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  opacity: 0.55;
+  animation: floatUp var(--duration, 8s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  bottom: -120px;
+  filter: blur(0.5px);
+}
+
+/* String */
+.balloon::after {
+  content: '';
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 18px;
+  background: rgba(196, 149, 106, 0.4);
+}
+
+/* Shine */
+.balloon::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 22%;
+  width: 28%;
+  height: 28%;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  transform: rotate(-30deg);
+}
+
+@keyframes floatUp {
+  0%   { transform: translateY(0) rotate(var(--tilt, -3deg)); opacity: 0.55; }
+  50%  { transform: translateY(-60px) rotate(calc(var(--tilt, -3deg) * -1)); opacity: 0.65; }
+  100% { transform: translateY(0) rotate(var(--tilt, -3deg)); opacity: 0.55; }
+}
+
+.balloon:nth-child(1)  { width: 90px;  height: 105px; background: radial-gradient(135deg, #8B5E3C, #5a3520); left: 5%;   --duration: 7s;  --delay: 0s;    --tilt: -4deg; bottom: 10%; }
+.balloon:nth-child(2)  { width: 60px;  height: 72px;  background: radial-gradient(135deg, #C4956A, #8B5E3C); left: 12%;  --duration: 9s;  --delay: 1.5s;  --tilt: 3deg;  bottom: 30%; }
+.balloon:nth-child(3)  { width: 110px; height: 128px; background: radial-gradient(135deg, #6b3f25, #3d2b22); left: 20%;  --duration: 11s; --delay: 0.8s;  --tilt: -6deg; bottom: 5%;  }
+.balloon:nth-child(4)  { width: 45px;  height: 54px;  background: radial-gradient(135deg, rgba(244,167,185,0.7), rgba(196,149,106,0.5)); left: 35%;  --duration: 6s;  --delay: 2.2s;  --tilt: 5deg;  bottom: 60%; }
+.balloon:nth-child(5)  { width: 80px;  height: 94px;  background: radial-gradient(135deg, #A0714F, #6b3f25); left: 50%;  --duration: 8.5s; --delay: 0.3s;  --tilt: -2deg; bottom: 15%; }
+.balloon:nth-child(6)  { width: 55px;  height: 65px;  background: radial-gradient(135deg, rgba(137,196,225,0.6), rgba(139,94,60,0.4)); left: 63%;  --duration: 10s; --delay: 1s;    --tilt: 4deg;  bottom: 45%; }
+.balloon:nth-child(7)  { width: 95px;  height: 110px; background: radial-gradient(135deg, #7a4a2e, #4a2d1a); left: 75%;  --duration: 7.5s; --delay: 3s;    --tilt: -5deg; bottom: 8%;  }
+.balloon:nth-child(8)  { width: 50px;  height: 60px;  background: radial-gradient(135deg, #C4956A, #A0714F); left: 85%;  --duration: 9.5s; --delay: 0.6s;  --tilt: 2deg;  bottom: 35%; }
+.balloon:nth-child(9)  { width: 70px;  height: 82px;  background: radial-gradient(135deg, #5a3520, #2d1f18); left: 92%;  --duration: 8s;  --delay: 1.8s;  --tilt: -3deg; bottom: 20%; }
+.balloon:nth-child(10) { width: 40px;  height: 48px;  background: radial-gradient(135deg, rgba(244,167,185,0.5), rgba(244,167,185,0.2)); left: 28%;  --duration: 12s; --delay: 4s;    --tilt: 6deg;  bottom: 70%; }
+
+/* ─── Question marks ──────────────────────────────────── */
+.questionMarks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.qMark {
+  position: absolute;
+  font-family: var(--font-display);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--color-accent-pink), var(--color-accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  user-select: none;
+  line-height: 1;
+  opacity: 0.18;
+}
+
+.qMark:nth-child(1) { font-size: clamp(180px, 35vw, 320px); top: -60px;    left: -50px;  transform: rotate(-15deg); opacity: 0.22; }
+.qMark:nth-child(2) { font-size: clamp(120px, 22vw, 200px); top: 15%;      right: -30px; transform: rotate(12deg);  opacity: 0.18; }
+.qMark:nth-child(3) { font-size: clamp(150px, 28vw, 240px); bottom: -80px; left: 25%;    transform: rotate(-8deg);  opacity: 0.14; }
+.qMark:nth-child(4) { font-size: clamp(80px,  15vw, 130px); bottom: 20%;   right: 8%;    transform: rotate(20deg);  opacity: 0.16; }
+
+/* ─── Content ─────────────────────────────────────────── */
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--color-accent-pink);
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 8vw, 6.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--color-text);
+  margin-bottom: 3rem;
+  letter-spacing: -0.01em;
+}
+
+.title em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--color-brown-warm);
+}
+
+/* ─── Scroll indicator ────────────────────────────────── */
+.scrollIndicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, transparent, var(--color-brown-warm));
+}
+
+.scrollDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-brown-warm);
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ─── Mobile ──────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .hero {
+    padding: 1.5rem 1.5rem 6rem;
+    justify-content: flex-end;
+    min-height: 100svh;
+  }
+
+  .content {
+    text-align: left;
+  }
+
+  .eyebrow {
+    text-align: left;
+  }
+
+  .title {
+    font-size: clamp(2.6rem, 11vw, 3.5rem);
+    text-align: left;
+  }
+
+  .balloon {
+    opacity: 0.35;
+  }
+}

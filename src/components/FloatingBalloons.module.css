@@ -1,0 +1,73 @@
+.container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.balloon {
+  position: absolute;
+  bottom: -120px;
+  border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
+  animation: float linear infinite;
+  will-change: transform;
+}
+
+/* String */
+.balloon::after {
+  content: '';
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1.5px;
+  height: 18px;
+  background: rgba(196, 149, 106, 0.5);
+}
+
+/* Shine highlight */
+.balloon::before {
+  content: '';
+  position: absolute;
+  top: 18%;
+  left: 22%;
+  width: 28%;
+  height: 22%;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  transform: rotate(-30deg);
+}
+
+/* Individual balloon sizes and positions */
+.b1  { width: 70px;  height: 80px;  left: 5%;   animation-duration: 9s;  animation-delay: 0s;    background: #5C3A1E; opacity: 0.85; }
+.b2  { width: 45px;  height: 52px;  left: 12%;  animation-duration: 12s; animation-delay: -3s;   background: #7A4D2A; opacity: 0.5;  }
+.b3  { width: 90px;  height: 104px; left: 22%;  animation-duration: 7s;  animation-delay: -1s;   background: #8B5E3C; opacity: 0.9;  }
+.b4  { width: 38px;  height: 44px;  left: 32%;  animation-duration: 11s; animation-delay: -5s;   background: #4A2810; opacity: 0.4;  }
+.b5  { width: 65px;  height: 75px;  left: 42%;  animation-duration: 8s;  animation-delay: -2s;   background: #6B4020; opacity: 0.8;  }
+.b6  { width: 50px;  height: 58px;  left: 52%;  animation-duration: 10s; animation-delay: -4s;   background: #C4956A; opacity: 0.55; }
+.b7  { width: 100px; height: 116px; left: 60%;  animation-duration: 6.5s; animation-delay: -1.5s; background: #5C3A1E; opacity: 0.95; }
+.b8  { width: 42px;  height: 48px;  left: 70%;  animation-duration: 13s; animation-delay: -6s;   background: #8B5E3C; opacity: 0.45; }
+.b9  { width: 78px;  height: 90px;  left: 78%;  animation-duration: 7.5s; animation-delay: -0.5s; background: #7A4D2A; opacity: 0.85; }
+.b10 { width: 35px;  height: 40px;  left: 87%;  animation-duration: 14s; animation-delay: -7s;   background: #4A2810; opacity: 0.35; }
+.b11 { width: 58px;  height: 67px;  left: 93%;  animation-duration: 9.5s; animation-delay: -3.5s; background: #6B4020; opacity: 0.7;  }
+.b12 { width: 82px;  height: 95px;  left: 16%;  animation-duration: 8.5s; animation-delay: -2.5s; background: #C4956A; opacity: 0.6;  }
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  25% {
+    transform: translateY(-30vh) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-55vh) rotate(-2deg);
+  }
+  75% {
+    transform: translateY(-80vh) rotate(3deg);
+  }
+  100% {
+    transform: translateY(-110vh) rotate(-1deg);
+    opacity: 0;
+  }
+}

@@ -1,0 +1,40 @@
+.footer {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.bear {
+  margin: 0 auto 2rem;
+}
+
+.names {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--color-brown-warm);
+  margin-bottom: 0.75rem;
+}
+
+.tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  max-width: 400px;
+  margin: 0 auto 2rem;
+  line-height: 1.7;
+}
+
+.divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-brown-warm), transparent);
+  margin: 0 auto 2rem;
+}
+
+.copy {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+}
