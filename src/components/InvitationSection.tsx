@@ -22,9 +22,10 @@ export default function InvitationSection() {
         <h2 className={styles.heading}>HOLA, FAMILIA Y AMIGOS</h2>
 
         <p className={styles.body}>
-          "Hace meses vengo creciendo dentro de mi mami y alimentándome del amor de papi
-          y queremos compartir contigo —
-          <span className={styles.bodyHighlight}>¡La revelación de mi género!</span>"
+          Hace meses vengo creciendo dentro de mi mami y alimentándome del amor de papi
+          y queremos compartirlo con vos!
+          <span className={styles.bodyHighlight}>¡La revelación de mi género!</span>
+          <span className={styles.genderQuestion}>?</span>
         </p>
 
         <div className={styles.divider}><span>✦</span></div>

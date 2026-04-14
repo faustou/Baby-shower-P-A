@@ -30,6 +30,15 @@ function MapPinIcon() {
   )
 }
 
+function MapsLinkIcon() {
+  return (
+    <svg className={styles.mapsIcon} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#EA4335"/>
+      <path d="M12 11.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z" fill="#fff"/>
+    </svg>
+  )
+}
+
 export default function EventInfoSection() {
   const ref = useRef<HTMLElement>(null)
 
@@ -72,7 +81,23 @@ export default function EventInfoSection() {
               <MapPinIcon />
             </div>
             <p className={styles.cardLabel}>Lugar</p>
-            <p className={styles.cardValue}>[DIRECCIÓN A COMPLETAR]</p>
+            <a
+              className={styles.cardValue + ' ' + styles.cardAddressLink}
+              href="https://www.google.com.ar/maps/place/Av.+Ing.+Eduardo+Madero+2355,+B1669CLB+Del+Viso,+Provincia+de+Buenos+Aires/@-34.4592789,-58.8075223,20.5z/data=!4m6!3m5!1s0x95bc994ab44764d1:0xc7254d2be4a1b491!8m2!3d-34.4593734!4d-58.8072488!16s%2Fg%2F11ykhv7n4q?hl=es&entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Av. Ing. Eduardo Madero 2355, Del Viso
+            </a>
+            <a
+              className={styles.mapsButton}
+              href="https://www.google.com.ar/maps/place/Av.+Ing.+Eduardo+Madero+2355,+B1669CLB+Del+Viso,+Provincia+de+Buenos+Aires/@-34.4592789,-58.8075223,20.5z/data=!4m6!3m5!1s0x95bc994ab44764d1:0xc7254d2be4a1b491!8m2!3d-34.4593734!4d-58.8072488!16s%2Fg%2F11ykhv7n4q?hl=es&entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <MapsLinkIcon />
+              Ver en Maps
+            </a>
             <p className={styles.cardSub}>Te esperamos con mucho amor</p>
           </div>
         </div>

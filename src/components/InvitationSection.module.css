@@ -46,6 +46,7 @@
   line-height: 2;
   margin-bottom: 3rem;
   letter-spacing: 0.01em;
+  text-align: center;
 }
 
 /* The key phrase in italic with display font */
@@ -55,9 +56,14 @@
   font-size: clamp(1.4rem, 3vw, 2rem);
   font-style: italic;
   font-weight: 300;
-  color: var(--color-accent-pink);
   margin-top: 1.5rem;
   line-height: 1.5;
+  background: linear-gradient(135deg, var(--color-accent-pink), var(--color-accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: colorShift 1s ease-in-out infinite alternate;
 }
 
 .divider {
@@ -104,8 +110,36 @@
   line-height: 1.2;
 }
 
-.bearWrapper {
+.genderQuestion {
+  display: block;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 15vw, 9rem);
+  font-weight: 700;
+  line-height: 1;
+  margin-top: 1.5rem;
+  background: linear-gradient(135deg, var(--color-accent-pink), var(--color-accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: colorShift 1s ease-in-out infinite alternate;
+}
+
+@keyframes colorShift {
+  0%   { background-position: 0% 50%; filter: drop-shadow(0 0 20px rgba(244, 167, 185, 0.5)); }
+  100% { background-position: 100% 50%; filter: drop-shadow(0 0 20px rgba(137, 196, 225, 0.5)); }
+}
+
+.bearContainer {
+  position: relative;
+  width: 140px;
+  height: 140px;
   margin: 3rem auto 0;
+}
+
+.bearContainer svg {
+  transition: opacity 0.5s ease-in-out;
 }
 
 /* SVG Bear */

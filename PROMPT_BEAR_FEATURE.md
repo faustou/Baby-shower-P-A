@@ -1,3 +1,21 @@
+# PROMPT — Feature: Osito alternante con bebé revelación de género
+
+## Objetivo
+Modificar `BearSVG.tsx` para que el componente alterne en loop entre dos estados visuales:
+- **Estado 1:** El osito actual (marrón, tal como está)
+- **Estado 2:** Un bebé tierno vestido mitad rosa (#F4A7B9) mitad celeste (#89C4E1)
+
+La transición entre estados debe ser suave, con crossfade CSS (opacity), sin librerías externas.
+
+---
+
+## Implementación
+
+### Estructura del componente
+
+Reemplazar `BearSVG.tsx` completamente. El componente tiene dos SVGs superpuestos con `position: absolute`, y alterna la opacidad entre ellos usando un estado booleano que cambia cada 3 segundos con `setInterval`.
+
+```tsx
 import { useState, useEffect } from 'react'
 import styles from './InvitationSection.module.css'
 
@@ -7,7 +25,7 @@ export default function BearSVG() {
   useEffect(() => {
     const interval = setInterval(() => {
       setShowBaby(prev => !prev)
-    }, 1500)
+    }, 3000)
     return () => clearInterval(interval)
   }, [])
 
@@ -19,9 +37,8 @@ export default function BearSVG() {
         style={{ opacity: showBaby ? 0 : 1 }}
         width="140" height="140" viewBox="0 0 120 120"
         xmlns="http://www.w3.org/2000/svg"
-        aria-label="Osito tierno"
-        role="img"
       >
+        {/* --- PEGAR AQUÍ EL SVG DEL OSITO ACTUAL SIN CAMBIOS --- */}
         {/* Left ear */}
         <circle cx="30" cy="28" r="16" fill="#8B5E3C" />
         <circle cx="30" cy="28" r="9" fill="#C4956A" />
@@ -60,8 +77,8 @@ export default function BearSVG() {
         width="140" height="140" viewBox="0 0 120 120"
         xmlns="http://www.w3.org/2000/svg"
         aria-label="Bebé revelación de género"
-        role="img"
       >
+        {/* Definir clipPath para dividir el SVG al medio */}
         <defs>
           <clipPath id="leftHalf">
             <rect x="0" y="0" width="60" height="120" />
@@ -71,48 +88,67 @@ export default function BearSVG() {
           </clipPath>
         </defs>
 
+        {/* === CABEZA BASE (skin tone neutro) === */}
         {/* Cabeza izquierda — rosa */}
         <g clipPath="url(#leftHalf)">
+          {/* Orejita izquierda */}
           <circle cx="28" cy="48" r="10" fill="#F4A7B9" />
+          {/* Cabeza */}
           <circle cx="60" cy="52" r="36" fill="#FDDBB4" />
+          {/* Gorrito lado nena — rosa */}
           <ellipse cx="60" cy="20" rx="28" ry="18" fill="#F4A7B9" />
           <rect x="32" y="18" width="28" height="8" fill="#F4A7B9" />
+          {/* Pompón gorrito nena */}
           <circle cx="36" cy="14" r="6" fill="#fff" opacity="0.8" />
+          {/* Cachete rosa */}
           <circle cx="38" cy="60" r="7" fill="#F4A7B9" opacity="0.5" />
         </g>
 
         {/* Cabeza derecha — celeste */}
         <g clipPath="url(#rightHalf)">
+          {/* Orejita derecha */}
           <circle cx="92" cy="48" r="10" fill="#89C4E1" />
+          {/* Cabeza */}
           <circle cx="60" cy="52" r="36" fill="#FDDBB4" />
+          {/* Gorrito lado nene — celeste */}
           <ellipse cx="60" cy="20" rx="28" ry="18" fill="#89C4E1" />
           <rect x="60" y="18" width="28" height="8" fill="#89C4E1" />
+          {/* Pompón gorrito nene */}
           <circle cx="84" cy="14" r="6" fill="#fff" opacity="0.8" />
+          {/* Cachete celeste */}
           <circle cx="82" cy="60" r="7" fill="#89C4E1" opacity="0.5" />
         </g>
 
-        {/* Cara (sin clip) */}
+        {/* === CARA (encima de todo, sin clip) === */}
+        {/* Ojos */}
         <circle cx="46" cy="50" r="4.5" fill="#2d1f18" />
         <circle cx="74" cy="50" r="4.5" fill="#2d1f18" />
+        {/* Brillo ojos */}
         <circle cx="48" cy="48" r="1.5" fill="white" />
         <circle cx="76" cy="48" r="1.5" fill="white" />
+        {/* Naricita */}
         <ellipse cx="60" cy="60" rx="4" ry="2.5" fill="#E8A080" />
+        {/* Boquita sonriente */}
         <path d="M53 65 Q60 72 67 65" stroke="#C47060" strokeWidth="1.8" fill="none" strokeLinecap="round" />
+        {/* Línea divisoria central sutil */}
         <line x1="60" y1="16" x2="60" y2="120" stroke="rgba(255,255,255,0.25)" strokeWidth="1" strokeDasharray="3,3" />
 
+        {/* === CUERPO === */}
         {/* Cuerpo izquierda — rosa */}
         <g clipPath="url(#leftHalf)">
           <ellipse cx="60" cy="100" rx="26" ry="20" fill="#F4A7B9" />
+          {/* Detalle ropa nena: volado */}
           <ellipse cx="46" cy="82" rx="14" ry="5" fill="#F78FA7" opacity="0.7" />
         </g>
         {/* Cuerpo derecha — celeste */}
         <g clipPath="url(#rightHalf)">
           <ellipse cx="60" cy="100" rx="26" ry="20" fill="#89C4E1" />
+          {/* Detalle ropa nene: botón */}
           <circle cx="74" cy="84" r="3" fill="#5BA8C9" opacity="0.8" />
           <circle cx="74" cy="92" r="3" fill="#5BA8C9" opacity="0.8" />
         </g>
 
-        {/* Signo ? en la panza */}
+        {/* Signo ? central en la panza */}
         <text
           x="60" y="105"
           textAnchor="middle"
@@ -126,3 +162,31 @@ export default function BearSVG() {
     </div>
   )
 }
+```
+
+---
+
+## CSS a agregar en `InvitationSection.module.css`
+
+```css
+.bearContainer {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin: 3rem auto 0;
+}
+
+.bearContainer svg {
+  transition: opacity 0.8s ease-in-out;
+}
+```
+
+Reemplazar el `.bear` y `.bearWrapper` existentes por `.bearContainer`. Eliminar el `.bearWrapper` del módulo CSS si ya no se usa.
+
+---
+
+## Notas importantes
+- El `setInterval` debe limpiarse en el return del `useEffect` (ya está en el código)
+- Los `clipPath` ids `leftHalf` y `rightHalf` son globales en SVG — si hay múltiples instancias del componente en la misma página podrían colisionar. Como solo hay una instancia, no es problema.
+- NO tocar `InvitationSection.tsx` — solo `BearSVG.tsx` y `InvitationSection.module.css`
+- NO tocar ningún otro archivo
