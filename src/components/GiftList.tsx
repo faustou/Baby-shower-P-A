@@ -7,6 +7,7 @@ import styles from './GiftList.module.css'
 export default function GiftList() {
   const ref = useRef<HTMLElement>(null)
   const [gifts, setGifts] = useState<Gift[]>([])
+  const [aliasMp, setAliasMp] = useState('[ALIAS A COMPLETAR]')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
@@ -22,21 +23,26 @@ export default function GiftList() {
   }, [])
 
   useEffect(() => {
-    const fetchGifts = async () => {
-      const { data, error: supaError } = await supabase
-        .from('gifts')
-        .select('*')
-        .order('display_order')
+    const fetchAll = async () => {
+      const [giftsRes, settingsRes] = await Promise.all([
+        supabase.from('gifts').select('*').order('display_order'),
+        supabase.from('settings').select('value').eq('key', 'alias_mp').single(),
+      ])
 
-      if (supaError) {
+      if (giftsRes.error) {
         setError('No se pudieron cargar los regalos.')
       } else {
-        setGifts((data as Gift[]) ?? [])
+        setGifts((giftsRes.data as Gift[]) ?? [])
       }
+
+      if (settingsRes.data?.value) {
+        setAliasMp(settingsRes.data.value as string)
+      }
+
       setLoading(false)
     }
 
-    fetchGifts()
+    fetchAll()
   }, [])
 
   const handleGiftChosen = (giftId: string, chosenBy: string) => {
@@ -66,7 +72,7 @@ export default function GiftList() {
         {!loading && !error && gifts.length > 0 && (
           <div className={styles.grid}>
             {gifts.map((gift) => (
-              <GiftCard key={gift.id} gift={gift} onGiftChosen={handleGiftChosen} />
+              <GiftCard key={gift.id} gift={gift} aliasMp={aliasMp} onGiftChosen={handleGiftChosen} />
             ))}
           </div>
         )}

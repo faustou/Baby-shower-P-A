@@ -7,10 +7,11 @@ import styles from './GiftCard.module.css'
 
 interface Props {
   gift: Gift
+  aliasMp: string
   onGiftChosen: (giftId: string, chosenBy: string) => void
 }
 
-export default function GiftCard({ gift, onGiftChosen }: Props) {
+export default function GiftCard({ gift, aliasMp, onGiftChosen }: Props) {
   const [showModal, setShowModal] = useState(false)
   const [contributors, setContributors] = useState<string[]>([])
 
@@ -103,7 +104,7 @@ export default function GiftCard({ gift, onGiftChosen }: Props) {
           {gift.type === 'contribute' && (
             <div className={styles.contributeInfo}>
               Para aportar, transferí al alias:{' '}
-              <span className={styles.aliasText}>patriciayalex.mp</span>
+              <span className={styles.aliasText}>{aliasMp}</span>
             </div>
           )}
         </div>
