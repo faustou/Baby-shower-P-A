@@ -4,9 +4,10 @@ import styles from './ProgressBar.module.css'
 interface Props {
   current: number
   target: number
+  hideAmounts?: boolean
 }
 
-export default function ProgressBar({ current, target }: Props) {
+export default function ProgressBar({ current, target, hideAmounts = false }: Props) {
   const ref = useRef<HTMLDivElement>(null)
   const [animated, setAnimated] = useState(false)
 
@@ -35,10 +36,12 @@ export default function ProgressBar({ current, target }: Props) {
         />
       </div>
       <div className={styles.meta}>
-        <span className={styles.percent}>{pct}%</span>
-        <span className={styles.amounts}>
-          {fmt(current)} / {fmt(target)}
-        </span>
+        <span className={styles.percent}>{pct}% completado</span>
+        {!hideAmounts && (
+          <span className={styles.amounts}>
+            {fmt(current)} / {fmt(target)}
+          </span>
+        )}
       </div>
     </div>
   )

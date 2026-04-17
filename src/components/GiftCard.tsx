@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { Gift } from '../types'
+import { supabase } from '../lib/supabase'
 import ProgressBar from './ProgressBar'
 import ChooseGiftModal from './ChooseGiftModal'
 import styles from './GiftCard.module.css'
@@ -11,6 +12,22 @@ interface Props {
 
 export default function GiftCard({ gift, onGiftChosen }: Props) {
   const [showModal, setShowModal] = useState(false)
+  const [contributors, setContributors] = useState<string[]>([])
+
+  useEffect(() => {
+    if (gift.type !== 'contribute') return
+    supabase
+      .from('contributions')
+      .select('contributor_name')
+      .eq('gift_id', gift.id)
+      .order('created_at')
+      .then(({ data }) => {
+        const names = (data ?? [])
+          .map((r: { contributor_name: string | null }) => r.contributor_name)
+          .filter((n): n is string => Boolean(n))
+        setContributors(names)
+      })
+  }, [gift.id, gift.type])
 
   const fmt = (n: number) =>
     n.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 })
@@ -68,13 +85,25 @@ export default function GiftCard({ gift, onGiftChosen }: Props) {
             <ProgressBar
               current={gift.contributed_amount}
               target={gift.target_amount}
+              hideAmounts
             />
+          )}
+
+          {gift.type === 'contribute' && contributors.length > 0 && (
+            <div className={styles.contributorsList}>
+              <span className={styles.contributorsLabel}>Aportaron ♥</span>
+              <div className={styles.contributorNames}>
+                {contributors.map((name, i) => (
+                  <span key={i} className={styles.contributorChip}>{name}</span>
+                ))}
+              </div>
+            </div>
           )}
 
           {gift.type === 'contribute' && (
             <div className={styles.contributeInfo}>
               Para aportar, transferí al alias:{' '}
-              <span className={styles.aliasText}>[ALIAS A COMPLETAR]</span>
+              <span className={styles.aliasText}>patriciayalex.mp</span>
             </div>
           )}
         </div>
