@@ -58,8 +58,12 @@ export default function GiftCard({ gift, aliasMp, onGiftChosen }: Props) {
             <p className={styles.description}>{gift.description}</p>
           )}
 
-          {gift.price !== null && (
+          {gift.type === 'choose' && gift.price !== null && (
             <p className={styles.price}>{fmt(gift.price)}</p>
+          )}
+
+          {gift.type === 'contribute' && gift.target_amount !== null && (
+            <p className={styles.price}>Objetivo: {fmt(gift.target_amount)}</p>
           )}
 
           {gift.type === 'choose' && gift.is_chosen && gift.chosen_by && (
@@ -86,7 +90,6 @@ export default function GiftCard({ gift, aliasMp, onGiftChosen }: Props) {
             <ProgressBar
               current={gift.contributed_amount}
               target={gift.target_amount}
-              hideAmounts
             />
           )}
 
