@@ -124,7 +124,34 @@
   border-radius: 999px;
   background: linear-gradient(135deg, rgba(244, 167, 185, 0.15), rgba(137, 196, 225, 0.15));
   border: 1px solid rgba(244, 167, 185, 0.3);
-  margin-bottom: 2rem;
+  margin-bottom: 0.6rem;
+  cursor: pointer;
+  transition: background var(--transition-med), border-color var(--transition-med), transform var(--transition-fast);
+}
+
+.aliasBadge:hover {
+  background: linear-gradient(135deg, rgba(244, 167, 185, 0.25), rgba(137, 196, 225, 0.25));
+  border-color: rgba(244, 167, 185, 0.5);
+  transform: scale(1.02);
+}
+
+.aliasCopyIcon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-text-muted);
+  margin-left: 0.2rem;
+  transition: color var(--transition-fast);
+}
+
+.aliasBadge:hover .aliasCopyIcon {
+  color: var(--color-accent-pink);
+}
+
+.aliasCopiedMsg {
+  font-size: 0.75rem;
+  color: var(--color-accent-blue);
+  letter-spacing: 0.05em;
+  margin-bottom: 0;
 }
 
 .aliasBadgeText {
