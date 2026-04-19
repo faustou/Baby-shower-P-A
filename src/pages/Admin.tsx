@@ -127,9 +127,10 @@ interface GiftItemProps {
   gift: Gift
   onReset: (giftId: string) => void
   onContribute: (giftId: string, amount: number) => void
+  onDeleteContrib: (giftId: string, amount: number) => void
 }
 
-function GiftItem({ gift, onReset, onContribute }: GiftItemProps) {
+function GiftItem({ gift, onReset, onContribute, onDeleteContrib }: GiftItemProps) {
   const [expanded, setExpanded] = useState(false)
   const [contributions, setContributions] = useState<Contribution[]>([])
   const [loadingContribs, setLoadingContribs] = useState(false)
@@ -157,6 +158,16 @@ function GiftItem({ gift, onReset, onContribute }: GiftItemProps) {
       .update({ is_chosen: false, chosen_by: null })
       .eq('id', gift.id)
     if (!error) onReset(gift.id)
+  }
+
+  const handleDeleteContribution = async (contrib: Contribution) => {
+    if (!confirm(`¿Eliminar el aporte de ${contrib.contributor_name ?? 'Anónimo'} por ${fmt(contrib.amount)}?`)) return
+    const { error: delError } = await supabase.from('contributions').delete().eq('id', contrib.id)
+    if (delError) return
+    const newAmount = Math.max(0, gift.contributed_amount - contrib.amount)
+    await supabase.from('gifts').update({ contributed_amount: newAmount }).eq('id', gift.id)
+    setContributions((prev) => prev.filter((c) => c.id !== contrib.id))
+    onDeleteContrib(gift.id, contrib.amount)
   }
 
   const fmt = (n: number) =>
@@ -235,6 +246,13 @@ function GiftItem({ gift, onReset, onContribute }: GiftItemProps) {
                 {contrib.note && (
                   <span className={styles.contributionNote}>{contrib.note}</span>
                 )}
+                <button
+                  className={styles.deleteContribBtn}
+                  onClick={() => handleDeleteContribution(contrib)}
+                  title="Eliminar aporte"
+                >
+                  ✕
+                </button>
               </div>
             ))}
           </div>
@@ -284,6 +302,12 @@ function GiftsTab() {
     )
   }
 
+  const handleDeleteContrib = (giftId: string, amount: number) => {
+    setGifts((prev) =>
+      prev.map((g) => g.id === giftId ? { ...g, contributed_amount: Math.max(0, g.contributed_amount - amount) } : g)
+    )
+  }
+
   if (loading) return <p className={styles.loadingText}>Cargando...</p>
   if (gifts.length === 0) return <p className={styles.emptyText}>No hay regalos cargados aún.</p>
 
@@ -295,6 +319,7 @@ function GiftsTab() {
           gift={gift}
           onReset={handleReset}
           onContribute={handleContribute}
+          onDeleteContrib={handleDeleteContrib}
         />
       ))}
     </div>
