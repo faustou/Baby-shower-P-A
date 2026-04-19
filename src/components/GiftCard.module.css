@@ -126,6 +126,36 @@
   height: 12px;
 }
 
+/* Contributors list */
+.contributorsList {
+  margin-top: 1rem;
+}
+
+.contributorsLabel {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent-pink);
+  margin-bottom: 0.5rem;
+}
+
+.contributorNames {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.contributorChip {
+  padding: 0.25rem 0.7rem;
+  background: rgba(244, 167, 185, 0.1);
+  border: 1px solid rgba(244, 167, 185, 0.25);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--color-text);
+}
+
 /* Contribute section */
 .contributeInfo {
   margin-top: 0.75rem;

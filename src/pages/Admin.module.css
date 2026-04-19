@@ -455,6 +455,137 @@
   transform: rotate(180deg);
 }
 
+/* ============================
+   Inline edit — confirmations table
+   ============================ */
+.inlineEdit {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.inlineInput {
+  width: 64px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-brown-warm);
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.5rem;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.inlineInput:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(196, 149, 106, 0.25);
+}
+
+/* Icon buttons */
+.iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.iconBtn:hover {
+  border-color: var(--color-text-muted);
+  color: var(--color-text);
+}
+
+.iconBtnMuted {
+  opacity: 0.5;
+}
+
+.iconBtnMuted:hover {
+  opacity: 1;
+  border-color: var(--color-brown-warm);
+  color: var(--color-brown-warm);
+}
+
+.iconBtnSuccess {
+  border-color: rgba(137, 196, 225, 0.4);
+  color: var(--color-accent-blue);
+}
+
+.iconBtnSuccess:hover {
+  background: rgba(137, 196, 225, 0.1);
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
+}
+
+.iconBtnDanger {
+  border-color: rgba(244, 167, 185, 0.25);
+  color: var(--color-text-muted);
+}
+
+.iconBtnDanger:hover {
+  background: rgba(244, 167, 185, 0.1);
+  border-color: var(--color-accent-pink);
+  color: var(--color-accent-pink);
+}
+
+/* ============================
+   Edit contributed amount
+   ============================ */
+.editAmountSection {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.editAmountRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.editAmountLabel {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.editAmountInput {
+  width: 120px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-brown-warm);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.6rem;
+  color: var(--color-text);
+  font-size: 0.9rem;
+}
+
+.editAmountInput:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(196, 149, 106, 0.25);
+}
+
+.editAmountBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.editAmountBtn:hover {
+  color: var(--color-brown-warm);
+  border-color: var(--color-brown-warm);
+  border-style: solid;
+}
+
 /* Loading / empty */
 .loadingText,
 .emptyText {
