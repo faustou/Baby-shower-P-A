@@ -76,6 +76,28 @@ export default function GiftList() {
             ))}
           </div>
         )}
+
+        {!loading && (
+          <div className={styles.aliasCard}>
+            <div className={styles.aliasCardGlow} />
+            <p className={styles.aliasCardEyebrow}>¿Todavía no elegiste un regalo?</p>
+            <p className={styles.aliasCardText}>
+              Podés hacernos un aporte a este alias
+            </p>
+            <div className={styles.aliasBadge}>
+              <span className={styles.aliasBadgeText}>FAMILIA.BABY</span>
+              <span className={styles.aliasBadgeHeart}>💕</span>
+            </div>
+            <p className={styles.aliasOwner}>a nombre de Alex Emanuel Frattesi · Mercado Pago</p>
+            <p className={styles.aliasCardBody}>
+              Con tu ayuda vamos a poder comprar pañales, medicamentos, ropita,
+              productos de higiene, mantitas y otras cositas para el bebé.
+            </p>
+            <p className={styles.aliasCardThanks}>
+              ¡Gracias por acompañarnos en este momento tan especial!
+            </p>
+          </div>
+        )}
       </div>
     </section>
   )

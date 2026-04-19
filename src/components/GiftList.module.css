@@ -76,3 +76,163 @@
   color: var(--color-text-muted);
   padding: 5rem;
 }
+
+/* ─── Alias card ──────────────────────────────────────────── */
+.aliasCard {
+  position: relative;
+  margin-top: 5rem;
+  padding: 3.5rem 2.5rem;
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  text-align: center;
+  overflow: hidden;
+  box-shadow: var(--shadow-card), 0 0 80px rgba(244, 167, 185, 0.06);
+}
+
+.aliasCardGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(244, 167, 185, 0.08) 0%, transparent 70%),
+              radial-gradient(ellipse at 50% 100%, rgba(137, 196, 225, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.aliasCardEyebrow {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 0.8rem;
+}
+
+.aliasCardText {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-style: italic;
+  color: var(--color-text);
+  margin-bottom: 1.5rem;
+}
+
+.aliasBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.8rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(244, 167, 185, 0.15), rgba(137, 196, 225, 0.15));
+  border: 1px solid rgba(244, 167, 185, 0.3);
+  margin-bottom: 2rem;
+}
+
+.aliasBadgeText {
+  font-family: var(--font-body);
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  background: linear-gradient(135deg, var(--color-accent-pink), var(--color-accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.aliasBadgeHeart {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.aliasOwner {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  margin-bottom: 2rem;
+  opacity: 0.7;
+}
+
+.aliasCardBody {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  max-width: 540px;
+  margin: 0 auto 1.5rem;
+}
+
+.aliasCardThanks {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-style: italic;
+  color: var(--color-brown-warm);
+}
+
+@media (max-width: 640px) {
+  .aliasCard {
+    margin-top: 3.5rem;
+    padding: 0;
+    border-radius: var(--radius-lg);
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  .aliasCardGlow {
+    display: none;
+  }
+
+  .aliasCardEyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
+    margin-bottom: 1.2rem;
+  }
+
+  .aliasCardText {
+    font-size: 1rem;
+    margin-bottom: 1.6rem;
+    color: var(--color-text-muted);
+  }
+
+  .aliasBadge {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding: 1.1rem 1.2rem;
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    border: 1.5px solid rgba(244, 167, 185, 0.35);
+    margin-bottom: 0.7rem;
+    box-shadow: 0 4px 24px rgba(244, 167, 185, 0.12), 0 4px 24px rgba(137, 196, 225, 0.08);
+  }
+
+  .aliasBadgeText {
+    font-size: 1.6rem;
+    letter-spacing: 0.08em;
+  }
+
+  .aliasBadgeHeart {
+    font-size: 1.3rem;
+  }
+
+  .aliasOwner {
+    font-size: 0.72rem;
+    margin-bottom: 2rem;
+    opacity: 0.6;
+  }
+
+  .aliasCardBody {
+    font-size: 0.9rem;
+    line-height: 1.85;
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+
+  .aliasCardThanks {
+    font-size: 1rem;
+    text-align: center;
+    display: block;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+}

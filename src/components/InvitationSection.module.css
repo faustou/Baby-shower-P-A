@@ -189,4 +189,9 @@
   .divider::after {
     display: none;
   }
+
+  .signature,
+  .signatureNames {
+    text-align: center;
+  }
 }
