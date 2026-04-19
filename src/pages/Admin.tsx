@@ -258,17 +258,11 @@ interface GiftItemProps {
   gift: Gift
   onReset: (giftId: string) => void
   onContribute: (giftId: string, amount: number) => void
-<<<<<<< HEAD
   onDeleteContrib: (giftId: string, amount: number) => void
-}
-
-function GiftItem({ gift, onReset, onContribute, onDeleteContrib }: GiftItemProps) {
-=======
   onEditAmount: (giftId: string, newAmount: number) => void
 }
 
-function GiftItem({ gift, onReset, onContribute, onEditAmount }: GiftItemProps) {
->>>>>>> 63a927b775fa2d45c1cfabd903dd0a9cce800213
+function GiftItem({ gift, onReset, onContribute, onDeleteContrib, onEditAmount }: GiftItemProps) {
   const [expanded, setExpanded] = useState(false)
   const [contributions, setContributions] = useState<Contribution[]>([])
   const [loadingContribs, setLoadingContribs] = useState(false)
@@ -305,16 +299,6 @@ function GiftItem({ gift, onReset, onContribute, onEditAmount }: GiftItemProps) 
     if (!error) onReset(gift.id)
   }
 
-<<<<<<< HEAD
-  const handleDeleteContribution = async (contrib: Contribution) => {
-    if (!confirm(`¿Eliminar el aporte de ${contrib.contributor_name ?? 'Anónimo'} por ${fmt(contrib.amount)}?`)) return
-    const { error: delError } = await supabase.from('contributions').delete().eq('id', contrib.id)
-    if (delError) return
-    const newAmount = Math.max(0, gift.contributed_amount - contrib.amount)
-    await supabase.from('gifts').update({ contributed_amount: newAmount }).eq('id', gift.id)
-    setContributions((prev) => prev.filter((c) => c.id !== contrib.id))
-    onDeleteContrib(gift.id, contrib.amount)
-=======
   const startEditAmount = () => {
     setEditAmountValue(String(gift.contributed_amount))
     setEditingAmount(true)
@@ -335,7 +319,7 @@ function GiftItem({ gift, onReset, onContribute, onEditAmount }: GiftItemProps) 
       .eq('id', gift.id)
     if (!error) {
       onEditAmount(gift.id, parsed)
-      setContributions([]) // reset historial para que se recargue si abre de nuevo
+      setContributions([])
     }
     setEditingAmount(false)
     setEditAmountValue('')
@@ -375,7 +359,16 @@ function GiftItem({ gift, onReset, onContribute, onEditAmount }: GiftItemProps) 
     setEditingContribName('')
     setEditingContribAmount('')
     setSavingContrib(false)
->>>>>>> 63a927b775fa2d45c1cfabd903dd0a9cce800213
+  }
+
+  const handleDeleteContribution = async (contrib: Contribution) => {
+    if (!confirm(`¿Eliminar el aporte de ${contrib.contributor_name ?? 'Anónimo'} por ${fmt(contrib.amount)}?`)) return
+    const { error: delError } = await supabase.from('contributions').delete().eq('id', contrib.id)
+    if (delError) return
+    const newAmount = Math.max(0, gift.contributed_amount - contrib.amount)
+    await supabase.from('gifts').update({ contributed_amount: newAmount }).eq('id', gift.id)
+    setContributions((prev) => prev.filter((c) => c.id !== contrib.id))
+    onDeleteContrib(gift.id, contrib.amount)
   }
 
   const fmt = (n: number) =>
@@ -437,7 +430,6 @@ function GiftItem({ gift, onReset, onContribute, onEditAmount }: GiftItemProps) 
               <>
                 <ProgressBar current={gift.contributed_amount} target={gift.target_amount} />
 
-                {/* Edit total acumulado */}
                 <div className={styles.editAmountSection}>
                   {editingAmount ? (
                     <div className={styles.editAmountRow}>
@@ -556,11 +548,11 @@ function GiftItem({ gift, onReset, onContribute, onEditAmount }: GiftItemProps) 
                   </>
                 )}
                 <button
-                  className={styles.deleteContribBtn}
+                  className={`${styles.iconBtn} ${styles.iconBtnDanger}`}
                   onClick={() => handleDeleteContribution(contrib)}
                   title="Eliminar aporte"
                 >
-                  ✕
+                  <IconTrash />
                 </button>
               </div>
             ))}
@@ -611,15 +603,15 @@ function GiftsTab() {
     )
   }
 
-<<<<<<< HEAD
   const handleDeleteContrib = (giftId: string, amount: number) => {
     setGifts((prev) =>
       prev.map((g) => g.id === giftId ? { ...g, contributed_amount: Math.max(0, g.contributed_amount - amount) } : g)
-=======
+    )
+  }
+
   const handleEditAmount = (giftId: string, newAmount: number) => {
     setGifts((prev) =>
       prev.map((g) => g.id === giftId ? { ...g, contributed_amount: newAmount } : g)
->>>>>>> 63a927b775fa2d45c1cfabd903dd0a9cce800213
     )
   }
 
@@ -634,11 +626,8 @@ function GiftsTab() {
           gift={gift}
           onReset={handleReset}
           onContribute={handleContribute}
-<<<<<<< HEAD
           onDeleteContrib={handleDeleteContrib}
-=======
           onEditAmount={handleEditAmount}
->>>>>>> 63a927b775fa2d45c1cfabd903dd0a9cce800213
         />
       ))}
     </div>
