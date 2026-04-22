@@ -13,7 +13,7 @@ export default function Footer() {
         "Con mucho amor te esperamos para compartir
         el momento más especial de nuestras vidas"
       </p>
-      <p className={styles.copy}>Baby Shower · Domingo 24 de Mayo 2025</p>
+      <p className={styles.copy}>Baby Shower · Domingo 24 de Mayo 2026</p>
     </footer>
   )
 }

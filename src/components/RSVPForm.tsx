@@ -104,7 +104,7 @@ export default function RSVPForm() {
             </div>
 
             <div className={styles.field}>
-              <label htmlFor="rsvp-message" className={styles.label}>Mensaje para los papás (opcional)</label>
+              <label htmlFor="rsvp-message" className={styles.label}>Mensaje para los papás</label>
               <textarea
                 id="rsvp-message"
                 className={styles.textarea}
