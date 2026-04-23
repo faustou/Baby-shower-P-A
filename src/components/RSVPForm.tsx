@@ -54,6 +54,10 @@ export default function RSVPForm() {
     setName('')
     setGuestsCount(1)
     setMessage('')
+
+    setTimeout(() => {
+      document.getElementById('regalos')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 1800)
   }
 
   return (
@@ -126,6 +130,13 @@ export default function RSVPForm() {
             </button>
           </form>
         )}
+
+        <div className={styles.scrollIndicator} aria-hidden="true">
+          <span>Ver lista de regalos</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
       </div>
     </section>
   )

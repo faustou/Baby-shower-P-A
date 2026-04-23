@@ -1,8 +1,35 @@
 .section {
-  padding: 8rem 2rem;
+  padding: 4rem 2rem 1rem;
   background: var(--color-surface);
   position: relative;
   overflow: hidden;
+}
+
+.scrollIndicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 3rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  animation: bounceDown 2s ease-in-out infinite;
+  cursor: default;
+  user-select: none;
+}
+
+.scrollIndicator svg {
+  width: 20px;
+  height: 20px;
+  opacity: 0.6;
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50%       { transform: translateY(6px); opacity: 1; }
 }
 
 .section::before {

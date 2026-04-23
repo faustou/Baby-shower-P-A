@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import type { Gift } from '../types'
 import GiftCard from './GiftCard'
 import styles from './GiftList.module.css'
 
 export default function GiftList() {
-  const ref = useRef<HTMLElement>(null)
   const [gifts, setGifts] = useState<Gift[]>([])
   const [aliasMp, setAliasMp] = useState('[ALIAS A COMPLETAR]')
   const [loading, setLoading] = useState(true)
@@ -17,17 +16,6 @@ export default function GiftList() {
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) el.classList.add('visible') },
-      { threshold: 0.05 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
 
   useEffect(() => {
     const fetchAll = async () => {
@@ -61,7 +49,7 @@ export default function GiftList() {
   }
 
   return (
-    <section className={`${styles.section} section-animate`} id="regalos" ref={ref}>
+    <section className={styles.section} id="regalos">
       <div className={styles.inner}>
         <p className={styles.eyebrow}>Con tu ayuda</p>
         <h2 className={styles.title}>Lista de Regalos</h2>
